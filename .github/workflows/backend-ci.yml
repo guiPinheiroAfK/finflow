@@ -1,0 +1,70 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - "apps/backend/**"
+      - ".github/workflows/backend-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "apps/backend/**"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: finflow_test
+          POSTGRES_USER: finflow
+          POSTGRES_PASSWORD: finflow
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7.4-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    defaults:
+      run:
+        working-directory: apps/backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: temurin
+          cache: maven
+
+      - name: Build and test
+        run: ./mvnw verify
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/finflow_test
+          SPRING_DATASOURCE_USERNAME: finflow
+          SPRING_DATASOURCE_PASSWORD: finflow
+          SPRING_DATA_REDIS_HOST: localhost
+          SPRING_DATA_REDIS_PORT: 6379
+          FINFLOW_JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
+      - name: Upload test reports
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: surefire-reports
+          path: apps/backend/target/surefire-reports
