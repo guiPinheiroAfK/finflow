@@ -1,0 +1,23 @@
+# Backend
+apps/backend/target/
+apps/backend/*.jar
+apps/backend/.mvn/wrapper/maven-wrapper.jar
+
+# Frontend
+apps/frontend/node_modules/
+apps/frontend/dist/
+apps/frontend/.env.local
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# OS
+.DS_Store
+Thumbs.db
