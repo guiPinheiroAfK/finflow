@@ -4,6 +4,10 @@ import { ProtectedRoute } from '@/app/routes/ProtectedRoute'
 import { LoginPage } from '@/features/auth/pages/LoginPage'
 import { CustomersPage } from '@/features/customers/pages/CustomersPage'
 import { NewCustomerPage } from '@/features/customers/pages/NewCustomerPage'
+import { SuppliersPage } from '@/features/suppliers/pages/SuppliersPage'
+import { NewSupplierPage } from '@/features/suppliers/pages/NewSupplierPage'
+import { ProductsPage } from '@/features/products/pages/ProductsPage'
+import { NewProductPage } from '@/features/products/pages/NewProductPage'
 import { PlaceholderPage } from '@/shared/components/PlaceholderPage'
 
 export const router = createBrowserRouter([
@@ -23,8 +27,10 @@ export const router = createBrowserRouter([
           { path: '/cash-flow', element: <PlaceholderPage title="Fluxo de caixa" /> },
           { path: '/customers', element: <CustomersPage /> },
           { path: '/customers/new', element: <NewCustomerPage /> },
-          { path: '/suppliers', element: <PlaceholderPage title="Fornecedores" /> },
-          { path: '/products', element: <PlaceholderPage title="Produtos" /> },
+          { path: '/suppliers', element: <SuppliersPage /> },
+          { path: '/suppliers/new', element: <NewSupplierPage /> },
+          { path: '/products', element: <ProductsPage /> },
+          { path: '/products/new', element: <NewProductPage /> },
         ],
       },
     ],
