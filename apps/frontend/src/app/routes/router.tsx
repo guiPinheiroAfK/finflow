@@ -8,6 +8,11 @@ import { SuppliersPage } from '@/features/suppliers/pages/SuppliersPage'
 import { NewSupplierPage } from '@/features/suppliers/pages/NewSupplierPage'
 import { ProductsPage } from '@/features/products/pages/ProductsPage'
 import { NewProductPage } from '@/features/products/pages/NewProductPage'
+import { QuotesPage } from '@/features/quotes/pages/QuotesPage'
+import { NewQuotePage } from '@/features/quotes/pages/NewQuotePage'
+import { QuoteDetailPage } from '@/features/quotes/pages/QuoteDetailPage'
+import { OrdersPage } from '@/features/orders/pages/OrdersPage'
+import { OrderDetailPage } from '@/features/orders/pages/OrderDetailPage'
 import { PlaceholderPage } from '@/shared/components/PlaceholderPage'
 
 export const router = createBrowserRouter([
@@ -19,8 +24,11 @@ export const router = createBrowserRouter([
         element: <AppLayout />,
         children: [
           { path: '/', element: <PlaceholderPage title="Dashboard" /> },
-          { path: '/quotes', element: <PlaceholderPage title="Orçamentos" /> },
-          { path: '/orders', element: <PlaceholderPage title="Vendas" /> },
+          { path: '/quotes', element: <QuotesPage /> },
+          { path: '/quotes/new', element: <NewQuotePage /> },
+          { path: '/quotes/:id', element: <QuoteDetailPage /> },
+          { path: '/orders', element: <OrdersPage /> },
+          { path: '/orders/:id', element: <OrderDetailPage /> },
           { path: '/receivables', element: <PlaceholderPage title="Contas a receber" /> },
           { path: '/payables', element: <PlaceholderPage title="Contas a pagar" /> },
           { path: '/bank', element: <PlaceholderPage title="Extrato bancário" /> },
