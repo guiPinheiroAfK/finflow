@@ -1,0 +1,32 @@
+import { createBrowserRouter } from 'react-router-dom'
+import { AppLayout } from '@/app/layout/AppLayout'
+import { ProtectedRoute } from '@/app/routes/ProtectedRoute'
+import { LoginPage } from '@/features/auth/pages/LoginPage'
+import { CustomersPage } from '@/features/customers/pages/CustomersPage'
+import { NewCustomerPage } from '@/features/customers/pages/NewCustomerPage'
+import { PlaceholderPage } from '@/shared/components/PlaceholderPage'
+
+export const router = createBrowserRouter([
+  { path: '/login', element: <LoginPage /> },
+  {
+    element: <ProtectedRoute />,
+    children: [
+      {
+        element: <AppLayout />,
+        children: [
+          { path: '/', element: <PlaceholderPage title="Dashboard" /> },
+          { path: '/quotes', element: <PlaceholderPage title="Orçamentos" /> },
+          { path: '/orders', element: <PlaceholderPage title="Vendas" /> },
+          { path: '/receivables', element: <PlaceholderPage title="Contas a receber" /> },
+          { path: '/payables', element: <PlaceholderPage title="Contas a pagar" /> },
+          { path: '/bank', element: <PlaceholderPage title="Extrato bancário" /> },
+          { path: '/cash-flow', element: <PlaceholderPage title="Fluxo de caixa" /> },
+          { path: '/customers', element: <CustomersPage /> },
+          { path: '/customers/new', element: <NewCustomerPage /> },
+          { path: '/suppliers', element: <PlaceholderPage title="Fornecedores" /> },
+          { path: '/products', element: <PlaceholderPage title="Produtos" /> },
+        ],
+      },
+    ],
+  },
+])
