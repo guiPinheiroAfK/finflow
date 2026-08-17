@@ -13,6 +13,9 @@ import { NewQuotePage } from '@/features/quotes/pages/NewQuotePage'
 import { QuoteDetailPage } from '@/features/quotes/pages/QuoteDetailPage'
 import { OrdersPage } from '@/features/orders/pages/OrdersPage'
 import { OrderDetailPage } from '@/features/orders/pages/OrderDetailPage'
+import { ReceivablesPage } from '@/features/receivables/pages/ReceivablesPage'
+import { PayablesPage } from '@/features/payables/pages/PayablesPage'
+import { BankPage } from '@/features/bank/pages/BankPage'
 import { PlaceholderPage } from '@/shared/components/PlaceholderPage'
 
 export const router = createBrowserRouter([
@@ -29,9 +32,9 @@ export const router = createBrowserRouter([
           { path: '/quotes/:id', element: <QuoteDetailPage /> },
           { path: '/orders', element: <OrdersPage /> },
           { path: '/orders/:id', element: <OrderDetailPage /> },
-          { path: '/receivables', element: <PlaceholderPage title="Contas a receber" /> },
-          { path: '/payables', element: <PlaceholderPage title="Contas a pagar" /> },
-          { path: '/bank', element: <PlaceholderPage title="Extrato bancário" /> },
+          { path: '/receivables', element: <ReceivablesPage /> },
+          { path: '/payables', element: <PayablesPage /> },
+          { path: '/bank', element: <BankPage /> },
           { path: '/cash-flow', element: <PlaceholderPage title="Fluxo de caixa" /> },
           { path: '/customers', element: <CustomersPage /> },
           { path: '/customers/new', element: <NewCustomerPage /> },

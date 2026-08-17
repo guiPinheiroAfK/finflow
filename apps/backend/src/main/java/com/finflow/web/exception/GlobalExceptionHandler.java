@@ -1,8 +1,7 @@
 package com.finflow.web.exception;
 
 import com.finflow.application.exception.BusinessException;
-import com.finflow.domain.model.order.InvalidOrderStateException;
-import com.finflow.domain.model.quote.InvalidQuoteStateException;
+import com.finflow.domain.model.shared.DomainStateConflictException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,15 +20,8 @@ public class GlobalExceptionHandler {
                 Instant.now(), ex.status().value(), ex.status().getReasonPhrase(), ex.getMessage(), null));
     }
 
-    @ExceptionHandler(InvalidQuoteStateException.class)
-    public ResponseEntity<ApiError> handleInvalidQuoteState(InvalidQuoteStateException ex) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiError(
-                Instant.now(), HttpStatus.CONFLICT.value(), HttpStatus.CONFLICT.getReasonPhrase(),
-                ex.getMessage(), null));
-    }
-
-    @ExceptionHandler(InvalidOrderStateException.class)
-    public ResponseEntity<ApiError> handleInvalidOrderState(InvalidOrderStateException ex) {
+    @ExceptionHandler(DomainStateConflictException.class)
+    public ResponseEntity<ApiError> handleDomainStateConflict(DomainStateConflictException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiError(
                 Instant.now(), HttpStatus.CONFLICT.value(), HttpStatus.CONFLICT.getReasonPhrase(),
                 ex.getMessage(), null));
