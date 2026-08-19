@@ -76,4 +76,17 @@ public class Receivable {
         receivable.createdAt = LocalDateTime.now();
         return receivable;
     }
+
+    /** Baixa manual ou via conciliação bancária. Parcial se o valor pago for menor que o devido. */
+    public void pay(BigDecimal amountPaid, LocalDateTime paidAt) {
+        if (status == ReceivableStatus.PAID || status == ReceivableStatus.CANCELLED) {
+            throw new InvalidReceivableStateException(id, status, "baixar");
+        }
+        BigDecimal alreadyPaid = this.paidAmount == null ? BigDecimal.ZERO : this.paidAmount;
+        BigDecimal totalPaid = alreadyPaid.add(amountPaid);
+
+        this.paidAmount = totalPaid;
+        this.paidAt = paidAt;
+        this.status = totalPaid.compareTo(amount) >= 0 ? ReceivableStatus.PAID : ReceivableStatus.PARTIAL;
+    }
 }

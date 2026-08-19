@@ -84,4 +84,12 @@ public class Payable {
         payable.createdAt = LocalDateTime.now();
         return payable;
     }
+
+    public void pay(LocalDateTime paidAt) {
+        if (status != PayableStatus.PENDING) {
+            throw new InvalidPayableStateException(id, status, "baixar");
+        }
+        this.status = PayableStatus.PAID;
+        this.paidAt = paidAt;
+    }
 }
