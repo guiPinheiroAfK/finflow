@@ -16,6 +16,7 @@ import { OrderDetailPage } from '@/features/orders/pages/OrderDetailPage'
 import { ReceivablesPage } from '@/features/receivables/pages/ReceivablesPage'
 import { PayablesPage } from '@/features/payables/pages/PayablesPage'
 import { BankPage } from '@/features/bank/pages/BankPage'
+import { DashboardPage } from '@/features/dashboard/pages/DashboardPage'
 import { PlaceholderPage } from '@/shared/components/PlaceholderPage'
 
 export const router = createBrowserRouter([
@@ -26,7 +27,7 @@ export const router = createBrowserRouter([
       {
         element: <AppLayout />,
         children: [
-          { path: '/', element: <PlaceholderPage title="Dashboard" /> },
+          { path: '/', element: <DashboardPage /> },
           { path: '/quotes', element: <QuotesPage /> },
           { path: '/quotes/new', element: <NewQuotePage /> },
           { path: '/quotes/:id', element: <QuoteDetailPage /> },

@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,4 +24,6 @@ public interface QuoteRepository extends JpaRepository<Quote, UUID> {
     Page<Quote> findByStatus(QuoteStatus status, Pageable pageable);
 
     Page<Quote> findByCustomerId(UUID customerId, Pageable pageable);
+
+    long countByStatusIn(List<QuoteStatus> statuses);
 }
